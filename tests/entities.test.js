@@ -11,8 +11,7 @@
  *                                      \/_____/ \/_____/
  */
 
-var path = require('path'),
-    async = require('async'),
+var async = require('async'),
     test = require('unit.js');
 
 describe('ejs/entities', function () {
@@ -25,7 +24,8 @@ describe('ejs/entities', function () {
       Entities,
       Entity = require('../lib/entity'),
       EAlreadyRegistered = require('../lib/errors/EAlreadyRegistered'),
-      EUndefinedEntityType = require('../lib/errors/EUndefinedEntityType');
+      EUndefinedEntityType = require('../lib/errors/EUndefinedEntityType'),
+      EUndefinedPlugin = require('../lib/errors/EUndefinedPlugin');
 
   beforeEach(function () {
 
@@ -182,6 +182,131 @@ describe('ejs/entities', function () {
       });
 
       async.series(queue, done);
+
+    });
+
+  });
+
+  describe('Entities.registerPlugin()', function () {
+
+    it('shouldRegisterPlugin', function () {
+
+      var plg = function () {};
+
+      Entities.registerPlugin('test', 'Test', 'A test plugin.', plg);
+
+      test.object(
+        Entities.plugins()
+      ).is({
+        'test': {
+          title: 'Test',
+          description: 'A test plugin.',
+          callback: plg
+        }
+      });
+
+    });
+
+  });
+
+  describe('Entities.registeredPlugin()', function () {
+
+    it('shouldReturnFalseIfUndefined', function () {
+
+      test.bool(
+        Entities.registeredPlugin('test')
+      ).isNotTrue();
+
+    });
+
+    it('shouldReturnTrue', function () {
+
+      var plg = function () {};
+
+      Entities.registerPlugin('test', 'Test', 'A test plugin.', plg);
+
+      test.bool(
+        Entities.registeredPlugin('test')
+      ).isTrue();
+
+    });
+
+  });
+
+  describe('Entities.unregisterPlugin()', function () {
+
+    it('shouldThrowAnErrorIfUndefined', function () {
+
+      test.exception(function () {
+        Entities.unregisterPlugin('test');
+      }).isInstanceOf(EUndefinedPlugin);
+
+    });
+
+    it('shouldUnregisterPlugin', function () {
+
+      var plg = function () {};
+
+      Entities.registerPlugin('test', 'Test', 'A test plugin.', plg);
+      Entities.unregisterPlugin('test');
+
+      test.object(
+        Entities.plugins()
+      ).is({});
+
+    });
+
+  });
+
+  describe('Entities.plugin()', function () {
+
+    it('shouldThrowAnErrorIfUndefined', function () {
+
+      test.exception(function () {
+        Entities.plugin('test');
+      }).isInstanceOf(EUndefinedPlugin);
+
+    });
+
+    it('shouldReturnTheCallbackMethod', function () {
+
+      var plg = function () {};
+
+      Entities.registerPlugin('test', 'Test', 'A test plugin.', plg);
+
+      test.function(
+        Entities.plugin('test')
+      ).is(plg);
+
+    });
+
+  });
+
+  describe('Entities.plugins()', function () {
+
+    it('shouldReturnAnEmptyObject', function () {
+
+      test.object(
+        Entities.plugins()
+      ).is({});
+
+    });
+
+    it('shouldReturnRegisteredPlugins', function () {
+
+      var plg = function () {};
+
+      Entities.registerPlugin('test', 'Test', 'A test plugin.', plg);
+
+      test.object(
+        Entities.plugins()
+      ).is({
+        'test': {
+          title: 'Test',
+          description: 'A test plugin.',
+          callback: plg
+        }
+      });
 
     });
 
