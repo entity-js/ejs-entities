@@ -1,0 +1,23 @@
+{
+  "name": "ejs-entities",
+  "description": "Provides 'entities' component.",
+  "keywords": [
+    "EntityJS - Components",
+    "Entities"
+  ],
+  "author": "Orgun109uk <orgun109uk@gmail.com> (http://my-site.com/)",
+  "version": "0.0.1",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/entity-js/ejs-entities.git"
+  },
+  "scripts": {
+    "test": "mocha ./tests/"
+  },
+  "dependencies": {
+    "ejs-databases": "git://github.com/entity-js/ejs-databases.git#0.0.1",
+    "ejs-merge": "git://github.com/entity-js/ejs-merge.git#0.0.1",
+    "ejs-t": "git://github.com/entity-js/ejs-t.git#0.0.1",
+    "ejs-validators": "git://github.com/entity-js/ejs-validators.git#0.0.1"
+  }
+}
