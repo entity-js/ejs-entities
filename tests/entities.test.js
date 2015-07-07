@@ -12,20 +12,20 @@
  */
 
 var async = require('async'),
-    test = require('unit.js');
+    test = require('unit.js'),
+    databases = require('ejs-databases'),
+    Entity = require('../lib/entity'),
+    EAlreadyRegistered = require('../lib/errors/EAlreadyRegistered'),
+    EUndefinedEntityType = require('../lib/errors/EUndefinedEntityType'),
+    EUndefinedPlugin = require('../lib/errors/EUndefinedPlugin');
+
+var Entities;
 
 describe('ejs/entities', function () {
 
   'use strict';
 
   /* eslint max-statements:0 */
-
-  var databases = require('ejs-databases'),
-      Entities,
-      Entity = require('../lib/entity'),
-      EAlreadyRegistered = require('../lib/errors/EAlreadyRegistered'),
-      EUndefinedEntityType = require('../lib/errors/EUndefinedEntityType'),
-      EUndefinedPlugin = require('../lib/errors/EUndefinedPlugin');
 
   beforeEach(function () {
 

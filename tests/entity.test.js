@@ -11,30 +11,30 @@
  *                                      \/_____/ \/_____/
  */
 
-var path = require('path'),
-    async = require('async'),
-    test = require('unit.js');
+var async = require('async'),
+    test = require('unit.js'),
+    Entity = require('../lib/entity'),
+    types = require('../lib/types'),
+    EUnknownField = require('../lib/errors/EUnknownField'),
+    EInvalidType = require('../lib/errors/EInvalidType'),
+    ERequiredField = require('../lib/errors/ERequiredField'),
+    ENoFields = require('../lib/errors/ENoFields'),
+    EEntityNotFound = require('../lib/errors/EEntityNotFound'),
+    EUndefinedName = require('../lib/errors/EUndefinedName'),
+    ECantSaveTrashed = require('../lib/errors/ECantSaveTrashed'),
+    ECantTrashTrashed = require('../lib/errors/ECantTrashTrashed'),
+    EEntityNotTrashed = require('../lib/errors/EEntityNotTrashed'),
+    EMissingID = require('../lib/errors/EMissingID'),
+    EUndefinedBundle = require('../lib/errors/EUndefinedBundle');
+
+var databases;
 
 describe('ejs/entities/entity', function () {
 
   'use strict';
 
-  /* eslint max-statements:0 */
-
-  var Entity = require('../lib/entity'),
-      types = require('../lib/types'),
-      EUnknownField = require('../lib/errors/EUnknownField'),
-      EInvalidType = require('../lib/errors/EInvalidType'),
-      ERequiredField = require('../lib/errors/ERequiredField'),
-      ENoFields = require('../lib/errors/ENoFields'),
-      EEntityNotFound = require('../lib/errors/EEntityNotFound'),
-      EUndefinedName = require('../lib/errors/EUndefinedName'),
-      ECantSaveTrashed = require('../lib/errors/ECantSaveTrashed'),
-      ECantTrashTrashed = require('../lib/errors/ECantTrashTrashed'),
-      EEntityNotTrashed = require('../lib/errors/EEntityNotTrashed'),
-      EMissingID = require('../lib/errors/EMissingID'),
-      EUndefinedBundle = require('../lib/errors/EUndefinedBundle'),
-      databases;
+  /*eslint max-statements:0*/
+  /*jshint maxstatements:false*/
 
   beforeEach(function () {
 
