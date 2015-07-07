@@ -39,10 +39,11 @@ describe('ejs/entities', function () {
 
   afterEach(function (done) {
 
-    var queue = [],
-        name = require.resolve('../lib');
+    var queue = [];
 
-    delete require.cache[name];
+    delete require.cache[require.resolve('../lib')];
+
+    global._ejsStatic['ejs-entities'] = {_plugins: {}};
 
     queue.push(function (next) {
       databases.collection('entities_test').drop(function () {

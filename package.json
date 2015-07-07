@@ -6,7 +6,7 @@
     "Entities"
   ],
   "author": "Orgun109uk <orgun109uk@gmail.com> (http://my-site.com/)",
-  "version": "0.0.2",
+  "version": "0.0.1",
   "repository": {
     "type": "git",
     "url": "git://github.com/entity-js/ejs-entities.git"
@@ -17,8 +17,10 @@
     "jshint": "jshint index.js ./lib ./tests"
   },
   "dependencies": {
-    "ejs-databases": "git://github.com/entity-js/ejs-databases.git#0.0.2",
+    "ejs-databases": "git://github.com/entity-js/ejs-databases.git#0.0.3",
+    "ejs-listener": "git://github.com/entity-js/ejs-listener.git#0.0.2",
     "ejs-merge": "git://github.com/entity-js/ejs-merge.git#0.0.2",
+    "ejs-static": "git://github.com/entity-js/ejs-static.git#0.0.1",
     "ejs-t": "git://github.com/entity-js/ejs-t.git#0.0.2",
     "ejs-validators": "git://github.com/entity-js/ejs-validators.git#0.0.2"
   }
